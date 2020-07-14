@@ -1,27 +1,29 @@
-const db = require ("../../../db/db.json");
+const db = require ("../db/db.json");
 const fs = require ("fs");
 const path = require ("path");
 
 module.exports = function (app) {
     app.get("/api/notes", (req, res) => {
-        fs.readFile("../../../db/db.json", "utf-8", (err, data) => {
-            res.json(JSON.parse(data));
-        })
+      
+        console.log(db);
+            // console.log("should be data",JSON.parse(data));
+            res.json(db);
     });
     // GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
     // app.post("/api/notes", (req, res) => {
 //     const noteObj = req.body;
     app.post("/api/notes", (req, res) => {
-        fs.readFile("../../../db/db.json", "utf-8";
-
+        let dataArray = db;
+/////////// recode here//////////////
             const userNote = JSON.parse(data);
+            console.log(userNote);
             const userNewNote = req.body;
-
+            console.log(userNewNote);
             userNote.push(userNewNote);
 
-            fs.writeFileSync("../../../db/db.json", JSON.stringify(userNote), "utf8");
+            fs.writeFileSync("../db/db.json", JSON.stringify(userNote), "utf8");
             res.json(userNote);
-        );
+            // end recode/////////////////
     });
 
 }

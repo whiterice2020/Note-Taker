@@ -11,8 +11,8 @@ app.use(express.static("public"));
 
 
 ////////////// Router///////////////////
-require("../routes/routesAPI")(app);
-require("../routes/routesHTML")(app);
+require("./routes/routesAPI")(app);
+require("./routes/routesHTML")(app);
 // app.get("/api/characters/:character", function(req, res) {
 
 

@@ -11,9 +11,8 @@ app.use(express.static("public"));
 
 
 ////////////// Router///////////////////
+require("../routes/routesAPI")(app);
 require("../routes/routesHTML")(app);
-// require("../routes/routesAPI")(app);
-
 ///////////////// Routes//////////////////////
 // app.get("/", function(req, res) {
 //     res.sendFile(path.join(__dirname, "../../index.html"));

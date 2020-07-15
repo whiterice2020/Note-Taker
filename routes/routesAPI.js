@@ -26,7 +26,7 @@ module.exports = function (app) {
         console.log("dataArray"+dataArray);
     });
 
-}
+
 
 //    This section will delete the notes by the note id
 // app.delete("/api/notes/:id", (req, res) => {
@@ -40,13 +40,25 @@ module.exports = function (app) {
 //   });
 
 
-app.delete("api/notes/:id", (req, res) => {
-  let dataArray = db;
-  //   fs.writeFileSync("db/db.json", JSON.stringify(dataArray), "utf8");
-  let noteData = JSON.parse(fs.readFileSync("db/db.json", JSON.stringify(dataArray), "utf8"));
+// app.delete("api/notes/:id", (req, res) => {
+//   let dataArray = db;
+//   //   fs.writeFileSync("db/db.json", JSON.stringify(dataArray), "utf8");
+//   let noteData = JSON.parse(fs.readFileSync("db/db.json", JSON.stringify(dataArray), "utf8"));
+//   const deleteNotes = noteData.filter( function (usrNote) {
+//     return usrNote.id !== req.params.id;
+//   });
+//   fs.writeFileSync("db/db.json", JSON.stringify(deleteNotes));
+//   res.json(deleteNotes)
+//   })
+
+
+app.delete("/api/notes/:id", (req, res) => {
+  let noteData = JSON.parse(fs.readFileSync("db/db.json", "utf8"));
   const deleteNotes = noteData.filter( function (usrNote) {
     return usrNote.id !== req.params.id;
   });
   fs.writeFileSync("db/db.json", JSON.stringify(deleteNotes));
   res.json(deleteNotes)
-  })
+});
+
+}

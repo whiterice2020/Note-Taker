@@ -15,14 +15,15 @@ module.exports = function (app) {
     // * POST `/api/notes` - Should receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
     app.post("/api/notes", (req, res) => {
         let dataArray = db;
-        console.log(dataArray);
+        console.log("dataArray"+dataArray);
         const userNewNote = req.body;
-        console.log(userNewNote);
+        console.log("userNewNote" + userNewNote);
         userNewNote.id = uuidv1();
-        console.log(userNewNote.id);
         dataArray.push(userNewNote);
         fs.writeFileSync("db/db.json", JSON.stringify(dataArray), "utf8");
+        console.log("dbJson"+db.json);
         res.json(dataArray);
+        console.log("dataArray"+dataArray);
     });
 
 }
@@ -40,14 +41,12 @@ module.exports = function (app) {
 
 
 app.delete("api/notes/:id", (req, res) => {
-    // var db = req.db;
-    Post.remove({
-      _id: req.params.id
-    }, function(err, post){
-      if (err)
-        res.send(err)
-      res.send({
-        success: true
-      })
-    })
+  let dataArray = db;
+  //   fs.writeFileSync("db/db.json", JSON.stringify(dataArray), "utf8");
+  let noteData = JSON.parse(fs.readFileSync("db/db.json", JSON.stringify(dataArray), "utf8"));
+  const deleteNotes = noteData.filter( function (usrNote) {
+    return usrNote.id !== req.params.id;
+  });
+  fs.writeFileSync("db/db.json", JSON.stringify(deleteNotes));
+  res.json(deleteNotes)
   })
